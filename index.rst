@@ -14,6 +14,7 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
+   gnupg
 
 Indices and tables
 ==================

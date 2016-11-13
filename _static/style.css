@@ -1,0 +1,10 @@
+.embiggen {
+	font-size: 150%;
+}
+
+p.rubric {
+	margin-top: 0;
+	font-weight: 700;
+	font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+	font-size: 150%;
+}

@@ -6,7 +6,7 @@ on or figured out. Hopefully you'll find useful things here.
 
 Contributions are welcome, but this "wiki" doesn't have a pretty editor.
 Instead it uses `Sphinx <http://www.sphinx-doc.org/>`_ to build the pages from
-a `Git repository <https://github.com/bootc/wiki>` hosted on GitHub.
+a `Git repository <https://github.com/bootc/wiki>`_ hosted on GitHub.
 
 Table of Contents
 -----------------

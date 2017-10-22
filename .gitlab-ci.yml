@@ -25,6 +25,8 @@ build:
     expire_in: 1 week
   only:
     - master
+  except:
+    - triggers
   tags:
     - docker
 
@@ -34,6 +36,8 @@ deploy:
     - rsync -a --del public/ /var/www/wiki.bootc.net/en/latest/
   only:
     - master
+  except:
+    - triggers
   tags:
     - parker
 

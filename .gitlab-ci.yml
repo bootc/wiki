@@ -1,0 +1,54 @@
+---
+image: debian:stretch
+
+stages:
+  - build
+  - deploy
+  - Git Sync
+
+build:
+  stage: build
+  script:
+    - apt-get update -q
+    - >-
+      DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -q
+      -o DPkg::options::=--force-confdef
+      -o Dpkg::Options::=--force-confold
+    - >-
+      DEBIAN_FRONTEND=noninteractive apt-get install -y -q
+      make python3-sphinx python3-sphinx-rtd-theme
+    - make html
+    - mv _build/html/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+  only:
+    - master
+  tags:
+    - docker
+
+deploy:
+  stage: deploy
+  script:
+    - rsync -a --del public/ /var/www/wiki.bootc.net/en/latest/
+  only:
+    - master
+  tags:
+    - parker
+
+git-sync:
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+    - git sync-remote
+        git@github.com:bootc/wiki.git
+        git@git.boo.tc:bootc/wiki.git
+  stage: Git Sync
+  image: dkr.boo.tc/bootc/github-gitlab-sync:latest
+  tags:
+    - docker
+  only:
+    - triggers
+
+# vim: ft=yaml:sts=2:expandtab:sw=2:ts=2

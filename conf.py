@@ -21,7 +21,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import datetime
 import os
+
+now = datetime.datetime.now()
 
 # -- General configuration ------------------------------------------------
 
@@ -52,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'bootc\'s wiki'
-copyright = '2016, Chris Boot & contributors'
+copyright = "2016-{year}, Chris Boot & contributors".format(year=now.year)
 author = 'Chris Boot & contributors'
 
 # The version info for the project you're documenting, acts as replacement for

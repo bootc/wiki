@@ -33,7 +33,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - rsync -a --del public/ /var/www/wiki.bootc.net/en/latest/
+    - rsync -a --del public/ /var/www/wiki.boo.tc/en/latest/
   only:
     - master
   except:

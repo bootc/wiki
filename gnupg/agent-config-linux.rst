@@ -25,7 +25,7 @@ a systemd user service: you probably want to keep that setup.
 To make sure Xfce doesn't start ``ssh-agent`` for you, you need to disable it
 in your settings. Unfortunately this isn't presented anywhere in the GUI that I
 can find, but can be easily `disabled on the command-line
-<http://docs.xfce.org/xfce/xfce4-session/advanced#ssh_and_gpg_agents>`::
+<http://docs.xfce.org/xfce/xfce4-session/advanced#ssh_and_gpg_agents>`_::
 
   xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool -s false
 

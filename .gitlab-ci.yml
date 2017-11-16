@@ -27,8 +27,6 @@ build:
     - master
   except:
     - triggers
-  tags:
-    - docker
 
 deploy:
   stage: deploy
@@ -50,8 +48,6 @@ git-sync:
         git@git.boo.tc:bootc/wiki.git
   stage: Git Sync
   image: dkr.boo.tc/bootc/github-gitlab-sync:latest
-  tags:
-    - docker
   only:
     - triggers
 

@@ -6,7 +6,7 @@ stages:
   - deploy
   - Git Sync
 
-build:
+pages:
   stage: build
   script:
     - apt-get update -q

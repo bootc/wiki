@@ -3,7 +3,6 @@ image: debian:stretch
 
 stages:
   - build
-  - deploy
   - Git Sync
 
 pages:
@@ -11,7 +10,7 @@ pages:
   script:
     - apt-get update -q
     - >-
-      DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -q
+      DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -qq
       -o DPkg::options::=--force-confdef
       -o Dpkg::Options::=--force-confold
     - >-
@@ -26,17 +25,6 @@ pages:
     - master
   except:
     - triggers
-
-deploy:
-  stage: deploy
-  script:
-    - rsync -a --del public/ /var/www/wiki.boo.tc/en/latest/
-  only:
-    - master
-  except:
-    - triggers
-  tags:
-    - parker
 
 git-sync:
   script:

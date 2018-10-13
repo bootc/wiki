@@ -9,10 +9,6 @@ pages:
   script:
     - apt-get update -q
     - >-
-      DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -qq
-      -o DPkg::options::=--force-confdef
-      -o Dpkg::Options::=--force-confold
-    - >-
       DEBIAN_FRONTEND=noninteractive apt-get install -y -q
       make python3-sphinx python3-sphinx-rtd-theme
     - make html

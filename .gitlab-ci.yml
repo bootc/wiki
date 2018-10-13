@@ -1,12 +1,11 @@
 ---
-image: debian:stretch
-
 stages:
   - build
   - git-sync
 
 pages:
   stage: build
+  image: bootc/kitchen-sink:buster
   script:
     - apt-get update -q
     - >-
@@ -18,6 +17,8 @@ pages:
       make python3-sphinx python3-sphinx-rtd-theme
     - make html
     - mv _build/html/ public/
+    - mc config host add minio $MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+    - mc mirror --remove public/ minio/wiki.boo.tc
   artifacts:
     paths:
       - public

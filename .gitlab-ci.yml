@@ -18,7 +18,7 @@ pages:
     - make html
     - mv _build/html/ public/
     - mc config host add minio $MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-    - mc mirror --remove public/ minio/wiki.boo.tc
+    - mc mirror --overwrite --remove public/ minio/wiki.boo.tc
   artifacts:
     paths:
       - public

@@ -1,11 +1,12 @@
 ---
 stages:
   - build
+  - publish
   - git-sync
 
-pages:
+sphinx:
   stage: build
-  image: bootc/kitchen-sink:buster
+  image: debian:buster
   script:
     - apt-get update -q
     - >-
@@ -13,11 +14,20 @@ pages:
       make python3-sphinx python3-sphinx-rtd-theme
     - make html
     - mv _build/html/ public/
-    - mc config host add minio $MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-    - mc mirror --overwrite --remove public/ minio/wiki.boo.tc
   artifacts:
     paths:
       - public
+  only:
+    - master
+  except:
+    - triggers
+
+publish:
+  stage: publish
+  image: minio/mc:latest
+  script:
+    - mc config host add minio $MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+    - mc mirror --overwrite --remove public/ minio/wiki.boo.tc
   only:
     - master
   except:

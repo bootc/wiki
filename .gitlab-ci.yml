@@ -4,9 +4,9 @@ stages:
   - publish
   - git-sync
 
-sphinx:
+pages:
   stage: build
-  image: debian:buster
+  image: debian:bullseye
   script:
     - apt-get update -q
     - >-

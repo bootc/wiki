@@ -6,7 +6,7 @@ stages:
 
 pages:
   stage: build
-  image: debian:bullseye
+  image: debian:bookworm
   script:
     - apt-get update -q
     - >-
@@ -17,17 +17,6 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - master
-  except:
-    - triggers
-
-publish:
-  stage: publish
-  image: minio/mc:latest
-  script:
-    - mc config host add minio $MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-    - mc mirror --overwrite --remove public/ minio/wiki.boo.tc
   only:
     - master
   except:

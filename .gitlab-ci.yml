@@ -23,11 +23,15 @@ build:
     paths:
       - public
   rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger"
+      when: never
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
 
 pages:
   extends: build
   rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger"
+      when: never
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 git-sync:
@@ -39,7 +43,7 @@ git-sync:
     - git sync-remote
         git@github.com:${CI_PROJECT_PATH}.git
         git@git.boo.tc:${CI_PROJECT_PATH}.git
-  only:
-    - triggers
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger"
 
 # vim: ai ts=2 sw=2 et sts=2 ft=yaml
